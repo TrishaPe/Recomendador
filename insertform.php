@@ -14,8 +14,7 @@ $edad_fin = $_POST['edad_fin'] ?? '';
 $interes1 = $_POST['interes1'] ?? '';
 $interes2 = $_POST['interes2'] ?? '';
 $imagen = $_POST['imagen'] ?? '';
-$enlacein = $_POST['enlace'] ?? '';
-$enlace=$enlacein . '=1&t=carlosmonzon-21&tracking_id=carlosmonzon-21';
+$enlace = $_POST['enlace'] ?? '';
 
 echo "nombre: ".$nombre."<br>";
 echo "sexo: ".$sexo."<br>";
