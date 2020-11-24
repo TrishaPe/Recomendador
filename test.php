@@ -1,8 +1,6 @@
 <?php
 include(dirname(__FILE__)."/../conexion.php");
-if ($conexion->connect_error){
-  die("Connection failed: ".$conexion->connect_error);
-}
+
 
 $sexo = $_POST['sexo'] ?? '';
 $edad = $_POST['edad'] ?? '';

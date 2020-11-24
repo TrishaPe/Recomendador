@@ -1,8 +1,6 @@
 <?php
 include(dirname(__FILE__)."/../conexion.php");
-if ($conexion->connect_error){
-  die("Connection failed: ".$conexion->connect_error);
-}
+
 
 $sexo = $_POST['sexo'] ?? '';
 $edad = $_POST['edad'] ?? '';
@@ -43,6 +41,8 @@ $dropdowns='[
   <div class="wrapper">
     <nav class="main-header navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Christmas Crackers</a>
+      <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=30&p=48&l=ur1&category=ebfd&banner=0NR66V8RFMM5XRRH8382&f=ifr&linkID=83e93a41bbe0426c7f7e004fa55c9aff&t=carlosmonzon-21&tracking_id=carlosmonzon-21" width="728" height="90" scrolling="no" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="#">Sign out</a>

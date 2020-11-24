@@ -1,8 +1,5 @@
 <?php
 include(dirname(__FILE__)."/../conexion.php");
-if ($conexion->connect_error){
-  die("Connection failed: ".$conexion->connect_error);
-}
 
 $solintereses="SELECT * from intereses";
 $resintereses=mysqli_query($conexion, $solintereses);
