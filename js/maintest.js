@@ -1,6 +1,4 @@
-var checkboxes=document.getElementsByClassName("interes");
 var divarticulos=document.getElementById("content");
-var splitintereses=selintereses.split(',');
 
 /*On load:
 - Hide all articles
@@ -15,7 +13,27 @@ On change:
 //hide all articles
 hideArticles();
 
+//Check radio of selected gender from Index page
+var radiosexos=document.getElementsByClassName("sexo");
+for (let i=0; i<radiosexos.length; i++) {
+  for (let j=0; j<1; j++){
+    if (radiosexos[i].value==sexo){
+      radiosexos[i].checked=true;
+    }
+  }
+}
+
+//select dropdown of selected age from Index page
+var selectedad=document.getElementById("edad");
+for (let i=0; i<selectedad.children.length; i++) {
+  if (selectedad.children[i].value==edad) {
+    selectedad.children[i].selected=true;
+  }
+}
+
 //Check checkboxes of selected interests from Index page
+var checkboxes=document.getElementsByClassName("interes");
+var splitintereses=selintereses.split(',');
 for (let i=0; i<checkboxes.length; i++) {
   for (let j=0; j<splitintereses.length; j++){
     if (checkboxes[i].value==splitintereses[j]) {
@@ -24,19 +42,23 @@ for (let i=0; i<checkboxes.length; i++) {
   }
 }
 
-//Show related articles
-let intids=getInterestIds();
-ShowArticles(intids);
+//Get selected data
+let selSexo=getSexo();
+let selEdad=getEdad();
+let selInt=getInterestIds();
+ShowArticles(selSexo, selEdad, selInt);
 
 //Whenever a checkbox is checked or unchecked
 for (let i=0; i<checkboxes.length; i++){
   checkboxes[i].addEventListener("change", function(){
     hideArticles();
-    let intids=getInterestIds();
+    let selSexo=getSexo();
+    let selEdad=getEdad();
+    let selInt=getInterestIds();
 
     //if any of the interests is checked, hide everything unrelated to the checks. If no interests are checked, show all articles
-    if (intids!=""){
-      ShowArticles(intids);
+    if (selInt!=""){
+      ShowArticles(selSexo, selEdad, selInt);
     }else{
       let divarticulos=document.getElementById("content");
       for (let i=0; i<divarticulos.children.length; i++){
@@ -53,24 +75,35 @@ function hideArticles(){
   }
 }
 
-function getInterestIds(){
-  //Create array of the ids of the checked checkboxes
-  let intids=new Array;
-  for (let i=0; i<checkboxes.length; i++) {
-    if (checkboxes[i].checked) {
-      intids.push(checkboxes[i].id);
-    }
-  }
-  return intids;
+function getSexo(){
+  let selSexo=radiosexos.value;
+  return selSexo;
 }
 
-function ShowArticles(intids){
+function getEdad(){
+  let selEdad=selectedad.value;
+  return selEdad;
+}
+
+function getInterestIds(){
+  //Create array of the ids of the checked checkboxes
+  let selInt=new Array;
+  for (let i=0; i<checkboxes.length; i++) {
+    if (checkboxes[i].checked) {
+      selInt.push(checkboxes[i].id);
+    }
+  }
+  return selInt;
+}
+
+function ShowArticles(selSexo, selEdad, selInt){
+  console.log(articulos[1]);
   //Create an array of matching article ids from articulo_interes
   let artids=new Array();
   for (let i=0; i<artint.length; i++){
     let interes=artint[i].id_interes;
-    for (let j=0; j<intids.length; j++){
-      if (interes==intids[j]){
+    for (let j=0; j<selInt.length; j++){
+      if (interes==selInt[j]){
         artids.push(artint[i].id_articulo);
       }
     }
@@ -91,24 +124,43 @@ function ShowArticles(intids){
 
 
 /* SOURCE:
-<div id="checklist" class="flex-column nav-link feather">
-  <?php while($interes=mysqli_fetch_assoc($resintereses)){
-    echo "<div id='div".$interes[id]."' class='form-check'>
-    <input type='checkbox' class='form-check-input interes' id='int".$interes['id']."' name='int".$interes['id']."'>
-    <label class='form-check-label' for='".$interes['nombre']."'>".$interes['nombre']."</label>
-    </div>";
-  }?>
+
+while($sexo=mysqli_fetch_assoc($ressexos)){
+  echo "<DIV ID='div".$sexo['id']."' CLASS='form-check'>
+  <INPUT type='radio' CLASS='form-check-input sexo' ID='sex".$sexo['id']."' name='sex".$sexo['id']."' VALUE='".$sexo['nombre']."'>
+  ...
+  </div>";
+}?>
+
+<div class="form-group">
+  <select class="form-control" ID="edad">
+    <option value="1">1-3</option>
+    <option value="2">4-6</option>
+    <option value="3">7-10</option>
+    <option value="4">11-13</option>
+    <option value="5">14-16</option>
+    <option value="6">17-20</option>
+    <option value="7">21-25</option>
+    <option value="8">26-30</option>
+    <option value="9">31-35</option>
+    <option value="10">36-40</option>
+    <option value="11">41-50</option>
+    <option value="12">51-60</option>
+    <option value="13">60+</option>
+  </select>
 </div>
 
 //Datos de base de datos
 var articulos= <?php echo json_encode($articulos) ?>;
+var sexos= <?php echo json_encode($sexos) ?>;
 var intereses= <?php echo json_encode($intereses) ?>;
 var artint= <?php echo json_encode($artint) ?>;
 
 //Datos seleccionados en primera página
-var sexo = = <?php echo $sexo ?>;
-var edad = = <?php echo $edad ?>;
-var selintereses = <?php echo $selintereses ?>;
+var sexo = '<?php echo $sexo ?>';
+var edad = <?php echo $edad ?>;
+var selintereses = '<?php echo $selintereses ?>';
+
 
 */
 

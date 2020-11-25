@@ -11,7 +11,7 @@ body{
 
 .main-header{
   position:relative;
-  height:75px;
+  height:90px;
   z-index:200;
   background-color: cadetblue;
 }

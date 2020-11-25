@@ -1,29 +1,12 @@
-Create table `paginas`(
+Create table `sexos`(
   `id` bigint(20) UNSIGNED NOT NULL,
   `nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
 );
 
-INSERT INTO `paginas` (`id`, `nombre`) VALUES
-  (1, 'index')
-  ;
-
-Create table `elementos`(
-    `id` bigint(20) UNSIGNED NOT NULL,
-    `nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
-);
-
-INSERT INTO `elementos` (`id`, `nombre`) VALUES
-  (1, 'input')
-  ;
-
-Create table `page_elements`(
-    `page_id` bigint(20) UNSIGNED NOT NULL,
-    `element_id` bigint(20) UNSIGNED NOT NULL,
-    `cantidad` bigint(20) UNSIGNED NOT NULL
-);
-
-INSERT INTO `page_elements` (`page_id`, `element_id`, `cantidad`) VALUES
-  (1, 1, 5)
+INSERT INTO `sexos` (`id`, `nombre`) VALUES
+  (1, 'Masculino'),
+  (2, 'Feminino'),
+  (3, 'Indiferente')
   ;
 
 create table `intereses`(
@@ -68,12 +51,19 @@ Create table `generos`(
 INSERT INTO `generos` (`id`, `nombre`) VALUES
   (1, 'Romance'),
   (2, 'Aventura'),
-  (3, 'Horror'),
+  (3, 'Terror'),
   (4, 'Fantasía'),
   (5, 'Ciencia-ficción'),
-  (6, 'Acción'),
+  (6, 'Suspense'),
   (7, 'Comedia'),
-  (8, 'Accesorios')
+  (8, 'Histórico'),
+  (9, 'No Ficción'),
+  (10, 'Poesía'),
+  (11, 'Realismo'),
+  (12, 'Realismo Mágico'),
+  (13, 'Misterio'),
+  (14, 'Policíaca'),
+  (15, 'Accesorios'),
   ;
 
 create table `juego_tipos`(
@@ -91,17 +81,6 @@ INSERT INTO `juego_tipos` (`id`, `nombre`) VALUES
   (7, 'Deporte/Carrera'),
   (8, 'Estrategia'),
   (9, 'Accesorios')
-  ;
-
-Create table `sexos`(
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `nombre` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL
-);
-
-INSERT INTO `sexos` (`id`, `nombre`) VALUES
-  (1, 'Masculino'),
-  (2, 'Feminino'),
-  (3, 'Indiferente')
   ;
 
 Create table `articulos`(

@@ -21,17 +21,17 @@ $resintereses=mysqli_query($conexion, $solintereses);
     
     <h3>Elige género</h3>
     <div id="sexos" class="sexos">
-      <div id="masculino" class="image-stack">
+      <div id="Masculino" class="image-stack">
         <img src="imagenes/hombre.png">
         <img src="imagenes/nino.png">
         <h4>Masculino</h4>
       </div>
-      <div id="femenino" class="image-stack">
+      <div id="Femenino" class="image-stack">
         <img src="imagenes/mujer.png">
         <img src="imagenes/nina.png">
         <h4>Femenino</h4>
       </div>
-      <div id="indiferente" class="image-stack">
+      <div id="Indiferente" class="image-stack">
         <img src="imagenes/shrug.png">
         <h4>Indiferente</h4>
       </div>
@@ -71,7 +71,7 @@ $resintereses=mysqli_query($conexion, $solintereses);
   </div>
 </div>
 
-<form id="formbuscar" method="POST" action="searchpage.php">
+<form id="formbuscar" method="POST" action="test.php">
   <input type="hidden" name="sexo" id="sexo" />
   <input type="hidden" name="edad" id="edad" />
   <input type="hidden" name="selintereses" id="selintereses" />

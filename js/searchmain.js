@@ -1,6 +1,4 @@
-var checkboxes=document.getElementsByClassName("interes");
 var divarticulos=document.getElementById("content");
-var splitintereses=selintereses.split(',');
 
 /*On load:
 - Hide all articles
@@ -15,7 +13,27 @@ On change:
 //hide all articles
 hideArticles();
 
+//Check radio of selected gender from Index page
+var radiosexos=document.getElementsByClassName("sexo");
+for (let i=0; i<radiosexos.length; i++) {
+  for (let j=0; j<1; j++){
+    if (radiosexos[i].value==sexo){
+      radiosexos[i].checked=true;
+    }
+  }
+}
+
+//select dropdown of selected age from Index page
+var selectedad=document.getElementById("edad");
+for (let i=0; i<selectedad.children.length; i++) {
+  if (selectedad.children[i].value==edad) {
+    selectedad.children[i].selected=true;
+  }
+}
+
 //Check checkboxes of selected interests from Index page
+var checkboxes=document.getElementsByClassName("interes");
+var splitintereses=selintereses.split(',');
 for (let i=0; i<checkboxes.length; i++) {
   for (let j=0; j<splitintereses.length; j++){
     if (checkboxes[i].value==splitintereses[j]) {
@@ -88,3 +106,4 @@ function ShowArticles(intids){
     }
   }
 }
+

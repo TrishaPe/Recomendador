@@ -1,7 +1,6 @@
 <?php
 include(dirname(__FILE__)."/../conexion.php");
 
-
 $sexo = $_POST['sexo'] ?? '';
 $edad = $_POST['edad'] ?? '';
 $selintereses = $_POST['selintereses'] ?? '';
@@ -11,6 +10,9 @@ $resarticulos=mysqli_query($conexion, $solarticulos);
 
 $solintereses="SELECT id, nombre from intereses";
 $resintereses=mysqli_query($conexion, $solintereses);
+
+$solsexos="SELECT id, nombre from sexos";
+$ressexos=mysqli_query($conexion, $solsexos);
 
 $solartint="SELECT id_articulo, id_interes, interes_detalle from articulo_interes";
 $resartint=mysqli_query($conexion, $solartint);
@@ -25,7 +27,6 @@ $dropdowns='[
   {"8":{"libros":"generos"}}, 
   {"10":{"juegos":"juego_tipos"}}
 ]';
-
 
 ?>
 
@@ -43,7 +44,7 @@ $dropdowns='[
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Christmas Crackers</a>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
+          <a class="nav-link" href="#">Welcome</a>
         </li>
       </ul>
     </nav>
@@ -51,11 +52,47 @@ $dropdowns='[
     <div class="container-fluid">
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-          <div class="sidebar-sticky">
+          <div class="sidebar-sticky overflow-auto h-100">
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Género</span>
+            </h6>
+            <div class="flex-column nav-link feather">
+              <?php
+              $sexos=array();
+              while($rowsexo=mysqli_fetch_assoc($ressexos)){
+                echo "<div id='div".$rowsexo['id']."' class='form-check'>
+                <input type='radio' class='form-check-input sexo' id='sex".$rowsexo['id']."' name='sex".$rowsexo['id']."' value='".$rowsexo['nombre']."'>
+                <label class='form-check-label' for='".$rowsexo['nombre']."'>".$rowsexo['nombre']."</label>
+                </div>";
+                $sexos[]=$rowsexo;
+              }?>
+            </div>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Edad</span>
+            </h6>
+            <div class="form-group">
+              <select class="form-control" id="edad">
+                <option value="1">1-3</option>
+                <option value="2">4-6</option>
+                <option value="3">7-10</option>
+                <option value="4">11-13</option>
+                <option value="5">14-16</option>
+                <option value="6">17-20</option>
+                <option value="7">21-25</option>
+                <option value="8">26-30</option>
+                <option value="9">31-35</option>
+                <option value="10">36-40</option>
+                <option value="11">41-50</option>
+                <option value="12">51-60</option>
+                <option value="13">60+</option>
+              </select>
+            </div>
+
             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Intereses</span>
             </h6>
-            <div id="checklist" class="flex-column nav-link feather">
+            <div class="flex-column nav-link feather">
               <?php
               $intereses=array();
               while($interes=mysqli_fetch_assoc($resintereses)){
@@ -125,6 +162,7 @@ $dropdowns='[
   <script>
     //Datos de base de datos
     var articulos= <?php echo json_encode($articulos) ?>;
+    var sexos= <?php echo json_encode($sexos) ?>;
     var intereses= <?php echo json_encode($intereses) ?>;
     var artint= <?php echo json_encode($artint) ?>;
     
