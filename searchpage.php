@@ -62,8 +62,8 @@ $dropdowns='[
               $sexos=array();
               while($rowsexo=mysqli_fetch_assoc($ressexos)){
                 echo "<div id='div".$rowsexo['id']."' class='form-check'>
-                <input type='radio' class='form-check-input sexo' id='sex".$rowsexo['id']."' name='sex".$rowsexo['id']."' value='".$rowsexo['nombre']."'>
-                <label class='form-check-label' for='".$rowsexo['nombre']."'>".$rowsexo['nombre']."</label>
+                <input type='radio' class='form-check-input sexo' id='sex".$rowsexo['id']."' name='sexoOpcion' value='".$rowsexo['nombre']."'>
+                <label class='form-check-label' for='sexoOpcion'>".$rowsexo['nombre']."</label>
                 </div>";
                 $sexos[]=$rowsexo;
               }?>

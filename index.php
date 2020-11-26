@@ -71,7 +71,7 @@ $resintereses=mysqli_query($conexion, $solintereses);
   </div>
 </div>
 
-<form id="formbuscar" method="POST" action="test.php">
+<form id="formbuscar" method="POST" action="searchpage.php">
   <input type="hidden" name="sexo" id="sexo" />
   <input type="hidden" name="edad" id="edad" />
   <input type="hidden" name="selintereses" id="selintereses" />
