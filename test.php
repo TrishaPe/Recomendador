@@ -42,6 +42,7 @@ $dropdowns='[
   <div class="wrapper">
     <nav class="main-header navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Christmas Crackers</a>
+      <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=30&p=48&l=ur1&category=ebfd&banner=0NR66V8RFMM5XRRH8382&f=ifr&linkID=83e93a41bbe0426c7f7e004fa55c9aff&t=carlosmonzon-21&tracking_id=carlosmonzon-21" width="728" height="90" scrolling="no" marginwidth="0" style="border:none;" frameborder="0"></iframe>
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
           <a class="nav-link" href="#">Welcome</a>
@@ -61,8 +62,8 @@ $dropdowns='[
               $sexos=array();
               while($rowsexo=mysqli_fetch_assoc($ressexos)){
                 echo "<div id='div".$rowsexo['id']."' class='form-check'>
-                <input type='radio' class='form-check-input sexo' id='sex".$rowsexo['id']."' name='sex".$rowsexo['id']."' value='".$rowsexo['nombre']."'>
-                <label class='form-check-label' for='".$rowsexo['nombre']."'>".$rowsexo['nombre']."</label>
+                <input type='radio' class='form-check-input sexo' id='sex".$rowsexo['id']."' name='sexoOpcion' value='".$rowsexo['nombre']."'>
+                <label class='form-check-label' for='sexoOpcion'>".$rowsexo['nombre']."</label>
                 </div>";
                 $sexos[]=$rowsexo;
               }?>

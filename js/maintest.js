@@ -46,7 +46,14 @@ for (let i=0; i<checkboxes.length; i++) {
 let selSexo=getSexo();
 let selEdad=getEdad();
 let selInt=getInterestIds();
-ShowArticles(selSexo, selEdad, selInt);
+
+if (selInt!=""){
+  ShowArticles(selSexo, selEdad, selInt);
+}else{
+  for (let i=0; i<divarticulos.children.length; i++){
+    divarticulos.children[i].classList.remove("hidden");
+  }
+}
 
 //Whenever a checkbox is checked or unchecked
 for (let i=0; i<checkboxes.length; i++){
@@ -60,13 +67,42 @@ for (let i=0; i<checkboxes.length; i++){
     if (selInt!=""){
       ShowArticles(selSexo, selEdad, selInt);
     }else{
-      let divarticulos=document.getElementById("content");
-      for (let i=0; i<divarticulos.children.length; i++){
-        divarticulos.children[i].classList.remove("hidden");
-      }
+      showNoInterests(selSexo, selEdad);
     }
   });
 }
+
+//Whenever a radio button is changed
+for (let i=0; i<radiosexos.length; i++){
+  radiosexos[i].addEventListener("change", function(){
+    hideArticles();
+    let selSexo=getSexo();
+    let selEdad=getEdad();
+    let selInt=getInterestIds();
+
+    //if any of the interests is checked, hide everything unrelated to the checks. If no interests are checked, show all articles
+    if (selInt!=""){
+      ShowArticles(selSexo, selEdad, selInt);
+    }else{
+      showNoInterests(selSexo, selEdad);
+    }
+  });
+}
+
+//Whenever the age dropdown is changed
+selectedad.addEventListener("change", function(){
+  hideArticles();
+    let selSexo=getSexo();
+    let selEdad=getEdad();
+    let selInt=getInterestIds();
+
+    //if any of the interests is checked, hide everything unrelated to the checks. If no interests are checked, show all articles
+    if (selInt!=""){
+      ShowArticles(selSexo, selEdad, selInt);
+    }else{
+      showNoInterests(selSexo, selEdad);
+    }
+});
 
 // Helper functions
 function hideArticles(){
@@ -76,17 +112,67 @@ function hideArticles(){
 }
 
 function getSexo(){
-  let selSexo=radiosexos.value;
+  let selection;
+  for (let i=0; i<radiosexos.length; i++) {
+    if (radiosexos[i].checked){
+      selection=radiosexos[i].value;
+    }
+  }
+  
+  let sexoOpciones= {"Masculino":1, "Femenino":2, "Indiferente":3};
+  let selSexo=sexoOpciones[selection];
   return selSexo;
 }
 
 function getEdad(){
-  let selEdad=selectedad.value;
+  let edadOpcion=selectedad.value;
+  let selEdad=new Array();
+  switch (edadOpcion){
+    case "1":
+      selEdad=[1, 3];
+      break;
+    case "2":
+      selEdad=[4, 6];
+      break;
+    case "3":
+      selEdad=[7, 10];
+      break;
+    case "4":
+      selEdad=[11, 13];
+      break;
+    case "5":
+      selEdad=[14, 16];
+      break;
+    case "6":
+      selEdad=[17, 20];
+      break;
+    case "7":
+      selEdad=[21, 25];
+      break;
+    case "8":
+      selEdad=[26, 30];
+      break;
+    case "9":
+      selEdad=[31, 35];
+      break;
+    case "10":
+      selEdad=[36, 40];
+      break;
+    case "11":
+      selEdad=[41, 50];
+      break;
+    case "12":
+      selEdad=[51, 60];
+      break;
+    case "13":
+      selEdad=[60, 80];
+      break;
+  }
   return selEdad;
 }
 
 function getInterestIds(){
-  //Create array of the ids of the checked checkboxes
+  //Create array of the ids of the checked interests
   let selInt=new Array;
   for (let i=0; i<checkboxes.length; i++) {
     if (checkboxes[i].checked) {
@@ -96,8 +182,20 @@ function getInterestIds(){
   return selInt;
 }
 
+function show(articles){
+  for (let i=0; i<articles.length; i++){
+    let artid=articles[i];
+    for (let j=0; j<divarticulos.children.length; j++){
+      let targetid= "art"+artid;
+      if (divarticulos.children[j].id===targetid){
+        let target=divarticulos.children[j];
+        target.classList.remove("hidden");
+      }
+    }
+  }
+}
+
 function ShowArticles(selSexo, selEdad, selInt){
-  console.log(articulos[1]);
   //Create an array of matching article ids from articulo_interes
   let artids=new Array();
   for (let i=0; i<artint.length; i++){
@@ -109,46 +207,42 @@ function ShowArticles(selSexo, selEdad, selInt){
     }
   }
 
-  //show only articles that are in checked categories
-  for (let i=0; i<artids.length; i++){
-    let artid=artids[i];
-    for (let j=0; j<divarticulos.children.length; j++){
-      let targetid= "art"+artid;
-      if (divarticulos.children[j].id===targetid){
-        let target=divarticulos.children[j];
-        target.classList.remove("hidden");
+  //Match selected articles with gender and age
+  let finalArticles=new Array();
+  for (let i=0; i<articulos.length; i++){
+    for (let j=0; j<artids.length; j++){
+      if(articulos[i].id==artids[j]){
+        if (articulos[i].sexo==selSexo){
+          if (articulos[i].edad_in<=selEdad[0]){
+            if (articulos[i].edad_fin>=selEdad[1]){
+              finalArticles.push(articulos[i].id);
+            }
+          }
+        }
       }
     }
   }
+
+  //show the articles from the array
+  show(finalArticles);
+}
+
+function showNoInterests(selSexo, selEdad){
+  let articles=new Array();
+  for (let i=0; i<articulos.length; i++){
+    if (articulos[i].sexo==selSexo){
+      if (articulos[i].edad_in<=selEdad[0]){
+        if (articulos[i].edad_fin>=selEdad[1]){
+          articles.push(articulos[i].id);
+        }
+      }
+    }
+  }
+  show(articles);
 }
 
 
 /* SOURCE:
-
-while($sexo=mysqli_fetch_assoc($ressexos)){
-  echo "<DIV ID='div".$sexo['id']."' CLASS='form-check'>
-  <INPUT type='radio' CLASS='form-check-input sexo' ID='sex".$sexo['id']."' name='sex".$sexo['id']."' VALUE='".$sexo['nombre']."'>
-  ...
-  </div>";
-}?>
-
-<div class="form-group">
-  <select class="form-control" ID="edad">
-    <option value="1">1-3</option>
-    <option value="2">4-6</option>
-    <option value="3">7-10</option>
-    <option value="4">11-13</option>
-    <option value="5">14-16</option>
-    <option value="6">17-20</option>
-    <option value="7">21-25</option>
-    <option value="8">26-30</option>
-    <option value="9">31-35</option>
-    <option value="10">36-40</option>
-    <option value="11">41-50</option>
-    <option value="12">51-60</option>
-    <option value="13">60+</option>
-  </select>
-</div>
 
 //Datos de base de datos
 var articulos= <?php echo json_encode($articulos) ?>;

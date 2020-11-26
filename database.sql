@@ -5,7 +5,7 @@ Create table `sexos`(
 
 INSERT INTO `sexos` (`id`, `nombre`) VALUES
   (1, 'Masculino'),
-  (2, 'Feminino'),
+  (2, 'Femenino'),
   (3, 'Indiferente')
   ;
 
