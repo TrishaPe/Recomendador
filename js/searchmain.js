@@ -50,9 +50,7 @@ let selInt=getInterestIds();
 if (selInt!=""){
   ShowArticles(selSexo, selEdad, selInt);
 }else{
-  for (let i=0; i<divarticulos.children.length; i++){
-    divarticulos.children[i].classList.remove("hidden");
-  }
+  showNoInterests(selSexo, selEdad);
 }
 
 //Whenever a checkbox is checked or unchecked
