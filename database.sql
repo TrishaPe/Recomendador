@@ -22,7 +22,7 @@ INSERT INTO `intereses` (`id`, `nombre`, `imagen`) VALUES
   (4, 'Ropa', 'ropa.png'),
   (5, 'Ciencia', 'ciencia.png'),
   (6, 'Ordenador', 'ordenador.png'),
-  (7, 'Electrónicos', 'electrónicos.png'),
+  (7, 'Electrónicos', 'electronicos.png'),
   (8, 'Libros', 'libros.png'),
   (9, 'Cine', 'cine.png'),
   (10, 'Juegos', 'juegos.png')

@@ -210,7 +210,13 @@ function ShowArticles(selSexo, selEdad, selInt){
   for (let i=0; i<articulos.length; i++){
     for (let j=0; j<artids.length; j++){
       if(articulos[i].id==artids[j]){
-        if (articulos[i].sexo==selSexo){
+        if (selSexo==3){
+          if (articulos[i].edad_in<=selEdad[0]){
+            if (articulos[i].edad_fin>=selEdad[1]){
+              finalArticles.push(articulos[i].id);
+            }
+          }
+        }else if (articulos[i].sexo==selSexo){
           if (articulos[i].edad_in<=selEdad[0]){
             if (articulos[i].edad_fin>=selEdad[1]){
               finalArticles.push(articulos[i].id);
